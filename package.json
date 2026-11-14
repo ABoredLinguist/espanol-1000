@@ -1,0 +1,28 @@
+{
+  "name": "espanol-1000",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "validate-data": "tsx scripts/validate-data.ts",
+    "extract-data": "tsx scripts/extract-data.ts",
+    "check": "npm run validate-data && npm test && tsc -b"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.119.0",
+    "preact": "^10.26.5",
+    "ts-fsrs": "^5.4.2"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.1",
+    "tsx": "^4.23.15",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5",
+    "vite-plugin-pwa": "^2.0.0",
+    "vitest": "^5.1.0"
+  }
+}
