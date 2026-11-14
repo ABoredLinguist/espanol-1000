@@ -1,5 +1,5 @@
 import { useEffect } from 'preact/hooks';
-import { useStore, update } from './lib/store';
+import { useStore, update, notice, hideNotice } from './lib/store';
 import { syncLabel, sync } from './sync';
 import {
   DG, QZ, SES, SW, VB, closeModal, currentTab, curWord, dgNext, flip, grade, nextQ, openModal, swAns, swToggle, ui, vbNext, type Tab,
@@ -92,6 +92,11 @@ export function App() {
           </a>
         ))}
       </nav>
+      {notice.text && (
+        <div class="notice" role="status" onClick={hideNotice}>
+          {notice.text}
+        </div>
+      )}
       <ModalHost />
     </>
   );

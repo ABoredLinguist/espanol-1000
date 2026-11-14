@@ -67,7 +67,31 @@ export function replaceState(next: AppState, persist = true): void {
   update();
 }
 
-export const speak = (s: string) => speakRaw(s, S.set.voice, S.set.rate);
+/** A short message shown at the bottom of the screen (e.g. when audio can't play). */
+export const notice = { text: '' };
+let noticeTimer: ReturnType<typeof setTimeout> | undefined;
+export function showNotice(text: string, ms = 9000): void {
+  notice.text = text;
+  update();
+  clearTimeout(noticeTimer);
+  noticeTimer = setTimeout(() => {
+    notice.text = '';
+    update();
+  }, ms);
+}
+export function hideNotice(): void {
+  clearTimeout(noticeTimer);
+  notice.text = '';
+  update();
+}
+
+const AUDIO_HINT =
+  'No sound? Turn off Silent Mode (the switch or Action button on the side of your iPhone) and turn the volume up. ' +
+  'If it still stays quiet, open Settings here and pick a voice, or download a Spanish voice in iPhone Settings → Accessibility → Spoken Content → Voices.';
+export const speak = (s: string) =>
+  speakRaw(s, S.set.voice, S.set.rate, (why) =>
+    showNotice(why === 'unsupported' ? 'This browser can’t play speech. Try Safari or Chrome.' : AUDIO_HINT),
+  );
 
 /* ---------- derived values ---------- */
 export type Status = 'new' | 'learning' | 'mastered';
