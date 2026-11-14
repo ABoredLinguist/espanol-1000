@@ -39,7 +39,9 @@ Without these values the app still works. Progress stays on the device, and back
 
 ## Deploy (free)
 
-**Netlify:** push this folder to a GitHub repo, then **Add new site → Import from Git**. Use build command `npm run build` and publish directory `dist`. Add `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` under **Site settings → Environment variables**, then redeploy.
+**GitHub Pages (current setup):** every push to `main` runs `.github/workflows/deploy.yml`, which checks, builds and publishes to https://aboredlinguist.github.io/espanol-1000/. For sync, add `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` under the repo's **Settings → Secrets and variables → Actions**.
+
+**Netlify (alternative):** push this folder to a GitHub repo, then **Add new site → Import from Git**. Use build command `npm run build` and publish directory `dist`. Add `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` under **Site settings → Environment variables**, then redeploy.
 
 **Vercel:** the steps are the same (**Add New → Project**). It detects Vite automatically.
 
